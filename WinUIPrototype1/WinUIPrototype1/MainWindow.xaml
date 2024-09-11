@@ -1,0 +1,97 @@
+<?xml version="1.0" encoding="utf-8"?>
+<Window
+    x:Class="WinUIPrototype1.MainWindow"
+    xmlns="http://schemas.microsoft.com/winfx/2006/xaml/presentation"
+    xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
+    xmlns:local="using:WinUIPrototype1"
+    xmlns:d="http://schemas.microsoft.com/expression/blend/2008"
+    xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006"
+    mc:Ignorable="d"
+    Title="DWrite Itemization">
+
+    <Page>
+
+     
+        <Grid>
+            <Grid.ColumnDefinitions>
+                <ColumnDefinition Width="360"/>
+                <ColumnDefinition />
+            </Grid.ColumnDefinitions>
+            <Grid.RowDefinitions>
+                <RowDefinition Height="Auto"/>
+                <RowDefinition />
+                <RowDefinition />
+            </Grid.RowDefinitions>
+            <Rectangle 
+                Fill="AliceBlue" Grid.RowSpan="3"/>
+            <RichTextBlock 
+                    Grid.Column="0" Grid.RowSpan="3"
+                    Name="textAnalysysOverview"
+                    Margin="15" 
+                    IsTextSelectionEnabled="False" >
+                <Paragraph  FontWeight="Bold" FontSize="24" Margin="0 0 0 10">Overview</Paragraph>
+                <Paragraph FontSize="15" LineHeight="22" Margin="0 0 0 10">
+                    In DWrite, the IDWriteTextAnalyzer interface is used for lower-level layout 
+                    operations. This is typically used in apps that require more control over text layout.
+                    The higher-level IDWriteTextLayout interface is implemented internally using 
+                    IDWriteTextAnalyzer and related interfaces.
+                </Paragraph>
+                <Paragraph FontSize="15" LineHeight="22" Margin="0 0 0 10">
+                    <Run FontStyle="Italic">Text itemization</Run> is a key, low-level operation in text layout.
+                    Before text can be passed to a shaping engine, it must be segmented into
+                    <Run FontStyle="Italic">script</Run> runs (spans
+                    that have only one script—e.g., Latin, Arabic, etc.). The text will also need to be
+                    segemented into
+                    <Run FontStyle="Italic">bidi level</Run> runs (contiguous spans with a given bidi level. 
+                </Paragraph>
+                <Paragraph FontSize="15" LineHeight="22" Margin="0 0 0 10">
+                    (In rich text, text must also be segemented into
+                    <Run FontStyle="Italic">style</Run> runs: spans that have the same font formatting.)
+                </Paragraph>
+                <Paragraph FontSize="15" LineHeight="22" Margin="0 0 0 10">
+                    DWrite’s
+                    <Hyperlink NavigateUri="https://learn.microsoft.com/windows/win32/api/dwrite/nn-dwrite-idwritetextanalyzer">IDWriteTextAnalyzer</Hyperlink> 
+                    interface provides methods for segmenting the text into
+                    script runs and bidi level runs:
+                    <Run FontFamily="Consolas" FontSize="14">AnalyzeScript</Run>, and
+                    <Run FontFamily="Consolas" FontSize="14">AnalyzeBidi</Run>. Each uses callback methods 
+                    to return a list of script or bidi runs. A layout engine can merge these results to get
+                    a list of runs that each have a single script and a single bidi level.
+                </Paragraph>
+                <Paragraph FontSize="15" LineHeight="22" Margin="0 0 0 10">
+                    Some itemizers may separate script-neutral characters, such as punctuation, into separate
+                    script runs. In DWrite, however,
+                    <Run FontFamily="Consolas" FontSize="14">AnalyzeScript</Run> will merge neutral characters 
+                    into a preceding script-specific run.
+                </Paragraph>
+                <Paragraph FontSize="15" LineHeight="22" Margin="0 0 0 10">
+                    This app demonstrates DWrite’s itemization behaviour. For a given string and
+                    base paragraph direction, the script runs, bidi level runs, and merged script/bidi level 
+                    runs will be shown.
+                </Paragraph>
+            </RichTextBlock>
+            <StackPanel Grid.Column="1" Grid.Row="0"
+                        Orientation="Vertical" VerticalAlignment="Top" 
+                        Margin="15">
+                <TextBox Header="Text to analyze:"
+                        PlaceholderText="Enter text"
+                        Text="Hello ٣ سنين 普洱茶"
+                        Margin="0 0 0 20" />
+                <RadioButtons 
+                        Name="textBaseDirection" 
+                        Header="Text base direction:" 
+                        SelectedIndex="0" MaxColumns="2"
+                        Margin="0 0 0 20"
+                        SelectionChanged="textBaseDirection_Changed">
+                    <x:String>Left-to-right</x:String>
+                    <x:String>Right-to-left</x:String>
+                </RadioButtons>
+                <Button Content="Analyze text" Margin="0 0 0 20"
+                        Click="analyzeButton_Click" />
+                <Rectangle Fill="Gray" Height="2" />
+                
+            </StackPanel>
+        </Grid>
+
+    </Page>
+</Window>
