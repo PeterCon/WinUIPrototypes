@@ -89,7 +89,8 @@
                 <Button Content="Analyze text" Margin="0 0 0 20"
                         Click="analyzeButton_Click" />
                 <Rectangle Fill="Gray" Height="2" />
-                
+
+                <local:TextAnalysisRun />  
             </StackPanel>
         </Grid>
 

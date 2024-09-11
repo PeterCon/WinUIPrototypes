@@ -1,27 +1,25 @@
-﻿//
-// TextAnalysisRun.xaml.cpp
-// Implementation of the TextAnalysisRun class
-//
-
 #include "pch.h"
 #include "TextAnalysisRun.xaml.h"
+#if __has_include("TextAnalysisRun.g.cpp")
+#include "TextAnalysisRun.g.cpp"
+#endif
 
-using namespace WinUIPrototype1;
+using namespace winrt;
+using namespace Microsoft::UI::Xaml;
 
-using namespace Platform;
-using namespace Windows::Foundation;
-using namespace Windows::Foundation::Collections;
-using namespace Windows::UI::Xaml;
-using namespace Windows::UI::Xaml::Controls;
-using namespace Windows::UI::Xaml::Controls::Primitives;
-using namespace Windows::UI::Xaml::Data;
-using namespace Windows::UI::Xaml::Input;
-using namespace Windows::UI::Xaml::Media;
-using namespace Windows::UI::Xaml::Navigation;
+// To learn more about WinUI, the WinUI project structure,
+// and more about our project templates, see: http://aka.ms/winui-project-info.
 
-// The User Control item template is documented at https://go.microsoft.com/fwlink/?LinkId=234236
-
-TextAnalysisRun::TextAnalysisRun()
+namespace winrt::WinUIPrototype1::implementation
 {
-	InitializeComponent();
+    int32_t TextAnalysisRun::MyProperty()
+    {
+        throw hresult_not_implemented();
+    }
+
+    void TextAnalysisRun::MyProperty(int32_t /* value */)
+    {
+        throw hresult_not_implemented();
+    }
+
 }

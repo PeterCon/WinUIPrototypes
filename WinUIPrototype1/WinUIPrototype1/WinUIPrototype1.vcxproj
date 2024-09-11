@@ -116,12 +116,15 @@
     </ClInclude>
     <ClInclude Include="TextAnalysisRun.xaml.h">
       <DependentUpon>TextAnalysisRun.xaml</DependentUpon>
+      <SubType>Code</SubType>
     </ClInclude>
   </ItemGroup>
   <ItemGroup>
     <ApplicationDefinition Include="App.xaml" />
     <Page Include="MainWindow.xaml" />
-    <Page Include="TextAnalysisRun.xaml" />
+    <Page Include="TextAnalysisRun.xaml">
+      <SubType>Designer</SubType>
+    </Page>
   </ItemGroup>
   <ItemGroup>
     <ClCompile Include="pch.cpp">
@@ -136,12 +139,17 @@
     <ClCompile Include="$(GeneratedFilesDir)module.g.cpp" />
     <ClCompile Include="TextAnalysisRun.xaml.cpp">
       <DependentUpon>TextAnalysisRun.xaml</DependentUpon>
+      <SubType>Code</SubType>
     </ClCompile>
   </ItemGroup>
   <ItemGroup>
     <Midl Include="MainWindow.idl">
       <SubType>Code</SubType>
       <DependentUpon>MainWindow.xaml</DependentUpon>
+    </Midl>
+    <Midl Include="TextAnalysisRun.idl">
+      <DependentUpon>TextAnalysisRun.xaml</DependentUpon>
+      <SubType>Code</SubType>
     </Midl>
   </ItemGroup>
   <ItemGroup>

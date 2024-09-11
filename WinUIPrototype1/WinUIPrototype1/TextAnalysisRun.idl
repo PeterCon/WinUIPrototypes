@@ -1,0 +1,9 @@
+namespace WinUIPrototype1
+{
+    [default_interface]
+    runtimeclass TextAnalysisRun : Microsoft.UI.Xaml.Controls.UserControl
+    {
+        TextAnalysisRun();
+        Int32 MyProperty;
+    }
+}
