@@ -3,6 +3,7 @@
 #if __has_include("MainWindow.g.cpp")
 #include "MainWindow.g.cpp"
 #endif
+#include "TextAnalysisRun.xaml.h"
 
 using namespace winrt;
 using namespace Microsoft::UI::Xaml;
@@ -27,8 +28,18 @@ namespace winrt::WinUIPrototype1::implementation
 
     }
 
-    void MainWindow::analyzeButton_Click(IInspectable const&, RoutedEventArgs const&)
-    {
-        
+    void MainWindow::analyzeButton_Click(IInspectable const&, RoutedEventArgs const&)  
+    {  
+        // Try adding a TextAnalysisRun to the resultsStackPanel. Create the object, then set its ContentType property to SCRIPT_RUN.
+
+        auto analysisRun = WinUIPrototype1::TextAnalysisRun();  
+
+		// This doesn't work: the ContentType property is not found!!
+		// analysisRun.ContentType(WinUIPrototype1::implementation::TextAnalysisRun::CONTENT_TYPE::SCRIPT_RUN);
+
+        // making sure I can add a stock control first; replace with the custom control 
+        auto textBlock = Microsoft::UI::Xaml::Controls::TextBlock();  
+        textBlock.Text(L"Analysis complete.");  
+        this->resultsStackPanel().Children().Append(textBlock);  
     }
 }

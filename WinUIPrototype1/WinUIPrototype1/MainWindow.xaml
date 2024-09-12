@@ -90,7 +90,7 @@
                         Click="analyzeButton_Click" />
                 <Rectangle Fill="Gray" Height="2" />
 
-                <local:TextAnalysisRun />  
+                <StackPanel x:Name="resultsStackPanel" Orientation="Horizontal"></StackPanel>
             </StackPanel>
         </Grid>
 
