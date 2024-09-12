@@ -1,0 +1,45 @@
+﻿<UserControl
+    x:Class="XamlCxPrototype1.TextAnalysisRun"
+    xmlns="http://schemas.microsoft.com/winfx/2006/xaml/presentation"
+    xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
+    xmlns:local="using:XamlCxPrototype1"
+    xmlns:d="http://schemas.microsoft.com/expression/blend/2008"
+    xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006"
+    mc:Ignorable="d"
+    d:DesignHeight="300"
+    d:DesignWidth="400">
+
+    <Grid Margin="0 5 30 5" 
+          BorderBrush="Gray" BorderThickness="1" Padding="5">
+        <Grid.ColumnDefinitions>
+            <ColumnDefinition Width="Auto" />
+            <ColumnDefinition />
+        </Grid.ColumnDefinitions>
+        <Grid.RowDefinitions>
+            <RowDefinition x:Name="textRow"/>
+            <RowDefinition x:Name="startPositionRow"/>
+            <RowDefinition x:Name="lengthRow"/>
+            <RowDefinition x:Name="scriptRow"/>
+            <RowDefinition x:Name="bidiLevelRow"/>
+        </Grid.RowDefinitions>
+        <TextBlock Grid.Column="0" Grid.Row="0" Text="Text:" />
+        <TextBlock Grid.Column="1" Grid.Row="0" Margin="5 0"
+                   Name="runText" 
+                   Text="Abc12"/>
+        <TextBlock Grid.Column="0" Grid.Row="1" Text="Start position:" />
+        <TextBlock Grid.Column="1" Grid.Row="1" Margin="5 0"
+                   Name="runStartPosition" 
+                   Text="0"/>
+        <TextBlock Grid.Column="0" Grid.Row="2" Text="Length:" />
+        <TextBlock Grid.Column="1" Grid.Row="2" Margin="5 0"
+                   Name="runLength" 
+                   Text="5" />
+        <TextBlock Grid.Column="0" Grid.Row="3" Text="Script:" />
+        <TextBlock Grid.Column="1" Grid.Row="3" Margin="5 0"
+                   Name="runScript"
+                   Text="Latn" />
+        <TextBlock Grid.Column="0" Grid.Row="4" Text="Bidi level:" />
+        <TextBlock Grid.Column="1" Grid.Row="4" Margin="5 0"
+                   Name="runBidiLevel"
+                   Text="0" />
+    </Grid></UserControl>
