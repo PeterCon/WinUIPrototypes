@@ -51,3 +51,61 @@ void XamlCxPrototype1::TextAnalysisRun::ContentType::set(CONTENT_TYPE value)
 		break;
 	}
 }
+
+Platform::String^ XamlCxPrototype1::TextAnalysisRun::Text::get()
+{
+	String^ str = ref new String(m_text.c_str());
+	return  str;
+ }
+
+void XamlCxPrototype1::TextAnalysisRun::Text::set(Platform::String^ value)
+{
+	m_text = value->Data();
+	this->runText->Text = value;
+}
+
+int32 XamlCxPrototype1::TextAnalysisRun::StartPosition::get()
+{
+	return m_startPosition;
+}
+
+void XamlCxPrototype1::TextAnalysisRun::StartPosition::set(int32 value)
+{
+	m_startPosition = value;
+	this->runStartPosition->Text = value.ToString();
+}
+
+int32 XamlCxPrototype1::TextAnalysisRun::Length::get()
+{
+	return m_length;
+}
+
+void XamlCxPrototype1::TextAnalysisRun::Length::set(int32 value)
+{
+	m_length = value;
+	this->runLength->Text = value.ToString();
+}
+
+Platform::String^ XamlCxPrototype1::TextAnalysisRun::Script::get()
+{
+	String^ str = ref new String(m_script.c_str());
+	return str;
+}
+
+void XamlCxPrototype1::TextAnalysisRun::Script::set(Platform::String^ value)
+{
+	m_script = value->Data();
+	this->runScript->Text = value;
+}
+
+int32 XamlCxPrototype1::TextAnalysisRun::BidiLevel::get()
+{
+	return m_bidiLevel;
+}
+
+void XamlCxPrototype1::TextAnalysisRun::BidiLevel::set(int32 value)
+{
+	m_bidiLevel = value;
+	this->runBidiLevel->Text = value.ToString();
+}
+

@@ -8,96 +8,165 @@
     mc:Ignorable="d"
     Background="{ThemeResource ApplicationPageBackgroundThemeBrush}">
 
-    <Grid>
-        <Grid.ColumnDefinitions>
-            <ColumnDefinition Width="360"/>
-            <ColumnDefinition />
-        </Grid.ColumnDefinitions>
+    <Grid >
         <Grid.RowDefinitions>
             <RowDefinition Height="Auto"/>
             <RowDefinition />
-            <RowDefinition />
         </Grid.RowDefinitions>
 
-        <Rectangle 
-                Fill="AliceBlue" Grid.RowSpan="3"/>
+        <StackPanel Orientation="Horizontal" Grid.Row="0"
+                    Background="{ThemeResource SystemControlBackgroundChromeMediumBrush}">
+            <Button x:Name="HamburgerButton" Style="{StaticResource PaneToggleButtonStyle}"
+                    Click="HamburgerButton_Click"/>
+            <TextBlock Text="DWrite Text Itemization" FontSize="20" Margin="5"/>
+        </StackPanel>
 
-        <RichTextBlock 
-                    Grid.Column="0" Grid.RowSpan="3"
+        <SplitView x:Name="Splitter" Grid.Row="1" Margin="15"
+                   DisplayMode="Inline"
+                   IsPaneOpen="True" OpenPaneLength="360">
+            
+            <SplitView.Pane>
+                <RichTextBlock 
                     Name="textAnalysysOverview"
-                    Margin="15" 
+                    Margin="10" 
                     IsTextSelectionEnabled="False" >
-            <Paragraph  FontWeight="Bold" FontSize="24" Margin="0 0 0 10">Overview</Paragraph>
-            <Paragraph FontSize="15" LineHeight="22" Margin="0 0 0 10">
-                In DWrite, the IDWriteTextAnalyzer interface is used for lower-level layout 
+                    <Paragraph  FontWeight="Bold" FontSize="24" Margin="0 0 0 10">Overview</Paragraph>
+                    <Paragraph FontSize="15" LineHeight="22" Margin="0 0 0 10">
+                        In DWrite, the IDWriteTextAnalyzer interface is used for lower-level layout 
                     operations. This is typically used in apps that require more control over text layout.
                     The higher-level IDWriteTextLayout interface is implemented internally using 
                     IDWriteTextAnalyzer and related interfaces.
-            </Paragraph>
-            <Paragraph FontSize="15" LineHeight="22" Margin="0 0 0 10">
-                <Run FontStyle="Italic">Text itemization</Run> is a key, low-level operation in text layout.
+                    </Paragraph>
+                    <Paragraph FontSize="15" LineHeight="22" Margin="0 0 0 10">
+                        <Run FontStyle="Italic">Text itemization</Run> is a key, low-level operation in text layout.
                     Before text can be passed to a shaping engine, it must be segmented into
-                <Run FontStyle="Italic">script</Run> runs (spans
+                        <Run FontStyle="Italic">script</Run> runs (spans
                     that have only one script—e.g., Latin, Arabic, etc.). The text will also need to be
                     segemented into
-                <Run FontStyle="Italic">bidi level</Run> runs (contiguous spans with a given bidi level.
-            </Paragraph>
-            <Paragraph FontSize="15" LineHeight="22" Margin="0 0 0 10">
-                (In rich text, text must also be segemented into
-                <Run FontStyle="Italic">style</Run> runs: spans that have the same font formatting.)
-            </Paragraph>
-            <Paragraph FontSize="15" LineHeight="22" Margin="0 0 0 10">
-                DWrite’s
-                <Hyperlink NavigateUri="https://learn.microsoft.com/windows/win32/api/dwrite/nn-dwrite-idwritetextanalyzer">IDWriteTextAnalyzer</Hyperlink>
-                interface provides methods for segmenting the text into
+                        <Run FontStyle="Italic">bidi level</Run> runs (contiguous spans with a given bidi level.
+                    </Paragraph>
+                    <Paragraph FontSize="15" LineHeight="22" Margin="0 0 0 10">
+                        (In rich text, text must also be segemented into
+                        <Run FontStyle="Italic">style</Run> runs: spans that have the same font formatting.)
+                    </Paragraph>
+                    <Paragraph FontSize="15" LineHeight="22" Margin="0 0 0 10">
+                        DWrite’s
+                        <Hyperlink NavigateUri="https://learn.microsoft.com/windows/win32/api/dwrite/nn-dwrite-idwritetextanalyzer">IDWriteTextAnalyzer</Hyperlink>
+                        interface provides methods for segmenting the text into
                     script runs and bidi level runs:
-                <Run FontFamily="Consolas" FontSize="14">AnalyzeScript</Run> , and
-                <Run FontFamily="Consolas" FontSize="14">AnalyzeBidi</Run> . Each uses callback methods 
+                        <Run FontFamily="Consolas" FontSize="14">AnalyzeScript</Run> , and
+                        <Run FontFamily="Consolas" FontSize="14">AnalyzeBidi</Run> . Each uses callback methods 
                     to return a list of script or bidi runs. A layout engine can merge these results to get
                     a list of runs that each have a single script and a single bidi level.
-            </Paragraph>
-            <Paragraph FontSize="15" LineHeight="22" Margin="0 0 0 10">
-                Some itemizers may separate script-neutral characters, such as punctuation, into separate
+                    </Paragraph>
+                    <Paragraph FontSize="15" LineHeight="22" Margin="0 0 0 10">
+                        Some itemizers may separate script-neutral characters, such as punctuation, into separate
                     script runs. In DWrite, however,
-                <Run FontFamily="Consolas" FontSize="14">AnalyzeScript</Run> will merge neutral characters 
+                        <Run FontFamily="Consolas" FontSize="14">AnalyzeScript</Run> will merge neutral characters 
                     into a preceding script-specific run.
-            </Paragraph>
-            <Paragraph FontSize="15" LineHeight="22" Margin="0 0 0 10">
-                This app demonstrates DWrite’s itemization behaviour. For a given string and
+                    </Paragraph>
+                    <Paragraph FontSize="15" LineHeight="22" Margin="0 0 0 10">
+                        This app demonstrates DWrite’s itemization behaviour. For a given string and
                     base paragraph direction, the script runs, bidi level runs, and merged script/bidi level 
                     runs will be shown.
-            </Paragraph>
-        </RichTextBlock>
+                    </Paragraph>
+                </RichTextBlock>
+            </SplitView.Pane>
+            
+            <SplitView.Content>
+                <Grid>
+                    <Grid.RowDefinitions>
+                        <RowDefinition Height="Auto"/>
+                        <RowDefinition Height="Auto" />
+                    </Grid.RowDefinitions>
 
-        <StackPanel Grid.Column="1" Grid.Row="0"
-                    Orientation="Vertical" VerticalAlignment="Top" 
-                    Margin="15">
+                    <StackPanel Grid.Row="0"
+                                Orientation="Vertical" VerticalAlignment="Top" 
+                                Margin="15">
 
-            <TextBox Header="Text to analyze:"
-                        PlaceholderText="Enter text"
-                        Text="Hello ٣ سنين 普洱茶"
-                        Margin="0 0 0 20" />
+                        <TextBox Header="Text to analyze:"
+                                    PlaceholderText="Enter text"
+                                    Text="Hello لمدة ٣ سنوات 普洱茶"
+                                    Margin="0 0 0 20" />
 
-            <TextBlock Text="Base direction:" Margin="0 0 10 0"/>
-            <StackPanel Orientation="Horizontal">
-                <RadioButton GroupName="Text base direction" x:Name="LTR"
-                             Content="Left-to-right" Margin="0 0 0 10"
-                             Checked="BaseDirection_Checked"
-                             />
-                <RadioButton GroupName="Text base direction" x:Name="RTL"
-                             Content="Right-to-left" Margin="0 0 0 10"
-                             Checked="BaseDirection_Checked"/>
-            </StackPanel>
+                        <TextBlock Text="Base direction:" Margin="0 0 10 0"/>
+                        <StackPanel Orientation="Horizontal">
+                            <RadioButton GroupName="Text base direction" x:Name="LTR"
+                                         Content="Left-to-right" Margin="0 0 0 10"
+                                         Checked="BaseDirection_Checked"
+                                         />
+                            <RadioButton GroupName="Text base direction" x:Name="RTL"
+                                         Content="Right-to-left" Margin="0 0 0 10"
+                                         Checked="BaseDirection_Checked"/>
+                        </StackPanel>
 
-            <TextBlock x:Name="baseDirectionChoice" Text="(not set)" Margin="0 0 0 20"/>
+                        <TextBlock x:Name="baseDirectionChoice" Text="(not set)" Margin="0 0 0 20" Visibility="Collapsed"/>
 
-            <Button Content="Analyze text" Margin="0 0 0 20"
-                        Click="AnalyzeButton_Click" />
-            <Rectangle Fill="Gray" Height="2" />
+                        <Button Content="Analyze text" Margin="0 0 0 20"
+                                    Click="AnalyzeButton_Click" />
+                        <Rectangle Fill="Gray" Height="2" />
+                    </StackPanel>
+
+                    <Grid Grid.Row="1" Margin="15" BorderBrush="Red" BorderThickness="1">
+                        <Grid.ColumnDefinitions>
+                            <ColumnDefinition Width="Auto"/>
+                            <ColumnDefinition Width="Auto" />
+                        </Grid.ColumnDefinitions>
+                        <Grid.RowDefinitions>
+                            <RowDefinition Height="Auto"/>
+                            <RowDefinition Height="Auto"/>
+                            <RowDefinition Height="Auto"/>
+                        </Grid.RowDefinitions>
+
+                        <TextBlock Grid.Column="0" Grid.Row="0" Margin="0 5 5 5"
+                            Text="Script runs:" TextWrapping="Wrap"/>
+                        <TextBlock Grid.Column="0" Grid.Row="1" Margin="0 5 5 5"
+                            Text="Bidi runs:" TextWrapping="Wrap"/>
+                        <TextBlock Grid.Column="0" Grid.Row="2" Margin="0 5 5 5"
+                            Text="Merged runs:" TextWrapping="Wrap"/>
+
+                        <StackPanel Orientation="Horizontal" Grid.Column="1" Grid.Row="0" Margin="0 0 0 10">
+                            <local:TextAnalysisRun ContentType="SCRIPT_RUN" Text="Hello " Length="6"/>
+                            <local:TextAnalysisRun ContentType="SCRIPT_RUN" Text="لمدة ٣ سنوات " StartPosition="6" Length="13" Script="Arab"/>
+                            <local:TextAnalysisRun ContentType="SCRIPT_RUN" Text="普洱茶" StartPosition="19" Length="3" Script="Hani"/>
+                        </StackPanel>
+
+                        <StackPanel Orientation="Horizontal" Grid.Column="1" Grid.Row="1" Margin="0 0 0 10">
+                            <local:TextAnalysisRun ContentType="BIDI_LEVEL_RUN" Text="Hello " StartPosition="0" Length="6"/>
+                            <local:TextAnalysisRun ContentType="BIDI_LEVEL_RUN" Text="لمدة " StartPosition="6" Length="5" BidiLevel="1"/>
+                            <local:TextAnalysisRun ContentType="BIDI_LEVEL_RUN" Text="٣" StartPosition="11" Length="1" BidiLevel="2"/>
+                            <local:TextAnalysisRun ContentType="BIDI_LEVEL_RUN" Text=" سنوات" StartPosition="12" Length="6" BidiLevel="1"/>
+                            <local:TextAnalysisRun ContentType="BIDI_LEVEL_RUN" Text=" 普洱茶" StartPosition="18" Length="4" BidiLevel="0"/>
+                        </StackPanel>
+
+                        <StackPanel Orientation="Horizontal" Grid.Column="1" Grid.Row="2" Margin="0 0 0 10">
+                            <local:TextAnalysisRun ContentType="MERGED_RUN" Text="Hello "   StartPosition="0"   Length="6" Script="Latn" BidiLevel="0"/>
+                            <local:TextAnalysisRun ContentType="MERGED_RUN" Text="لمدة "    StartPosition="6"   Length="5" Script="Arab" BidiLevel="1"/>
+                            <local:TextAnalysisRun ContentType="MERGED_RUN" Text="٣"        StartPosition="11"  Length="1" Script="Arab" BidiLevel="2"/>
+                            <local:TextAnalysisRun ContentType="MERGED_RUN" Text=" سنوات"   StartPosition="12"  Length="6" Script="Arab" BidiLevel="1"/>
+                            <local:TextAnalysisRun ContentType="MERGED_RUN" Text=" "        StartPosition="18"  Length="1" Script="Arab" BidiLevel="0"/>
+                            <local:TextAnalysisRun ContentType="MERGED_RUN" Text="普洱茶"    StartPosition="19"  Length="1" Script="Hani" BidiLevel="0"/>
+                        </StackPanel>
+
+                    </Grid>
+                    
+                    
+
+                    <ScrollViewer Grid.Row="1" Margin="15 0"
+                                  x:Name="ResultsScrollViewer"
+                                  HorizontalScrollBarVisibility="Visible" 
+                                  HorizontalScrollMode="Auto"
+                                  IsTabStop="True"
+                                  Padding="0 0 0 16">
+                        <StackPanel x:Name="resultsStackPanel" Orientation="Horizontal">
+                        </StackPanel>
+                    </ScrollViewer>
+                        
 
 
-            <StackPanel x:Name="resultsStackPanel" Orientation="Horizontal"></StackPanel>
+                </Grid>
 
-        </StackPanel>
+            </SplitView.Content>
+        </SplitView>
     </Grid>
 </Page>

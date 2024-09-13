@@ -29,6 +29,11 @@ MainPage::MainPage()
 
 }
 
+void XamlCxPrototype1::MainPage::HamburgerButton_Click(Platform::Object^ sender, Windows::UI::Xaml::RoutedEventArgs^ e)
+{
+	this->Splitter->IsPaneOpen = !this->Splitter->IsPaneOpen;
+}
+
 void XamlCxPrototype1::MainPage::BaseDirection_Checked(Platform::Object^ sender, Windows::UI::Xaml::RoutedEventArgs^ e)
 {
 	RadioButton^ radioButton = safe_cast<RadioButton^>(sender);
@@ -43,5 +48,7 @@ void XamlCxPrototype1::MainPage::AnalyzeButton_Click(Platform::Object^ sender, W
 	analysisRun->ContentType = CONTENT_TYPE::MERGED_RUN;
 
 	this->resultsStackPanel->Children->Append(analysisRun);
+
+	this->ResultsScrollViewer->Focus(Windows::UI::Xaml::FocusState::Programmatic);
 }
 
