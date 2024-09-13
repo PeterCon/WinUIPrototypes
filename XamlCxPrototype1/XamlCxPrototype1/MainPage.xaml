@@ -8,7 +8,7 @@
     mc:Ignorable="d"
     Background="{ThemeResource ApplicationPageBackgroundThemeBrush}">
 
-    <Grid >
+    <Grid > <!-- page grid -->
         <Grid.RowDefinitions>
             <RowDefinition Height="Auto"/>
             <RowDefinition />
@@ -74,12 +74,14 @@
             </SplitView.Pane>
             
             <SplitView.Content>
-                <Grid>
+                <Grid> <!-- content grid -->
                     <Grid.RowDefinitions>
+                        <RowDefinition Height="Auto"/>
                         <RowDefinition Height="Auto"/>
                         <RowDefinition Height="Auto" />
                     </Grid.RowDefinitions>
 
+                    <!-- input controls -->
                     <StackPanel Grid.Row="0"
                                 Orientation="Vertical" VerticalAlignment="Top" 
                                 Margin="15">
@@ -105,68 +107,64 @@
                         <Button Content="Analyze text" Margin="0 0 0 20"
                                     Click="AnalyzeButton_Click" />
                         <Rectangle Fill="Gray" Height="2" />
-                    </StackPanel>
+                    </StackPanel> <!-- end input controls -->
 
-                    <Grid Grid.Row="1" Margin="15" BorderBrush="Red" BorderThickness="1">
+                    <!-- results grid -->
+                    <Grid Grid.Row="1" Margin="15">
                         <Grid.ColumnDefinitions>
-                            <ColumnDefinition Width="Auto"/>
-                            <ColumnDefinition Width="Auto" />
+                            <ColumnDefinition Width="Auto"/>    <!-- left column for row headings -->
+                            <ColumnDefinition />                <!-- right column for results -->
                         </Grid.ColumnDefinitions>
-                        <Grid.RowDefinitions>
-                            <RowDefinition Height="Auto"/>
-                            <RowDefinition Height="Auto"/>
-                            <RowDefinition Height="Auto"/>
-                        </Grid.RowDefinitions>
 
-                        <TextBlock Grid.Column="0" Grid.Row="0" Margin="0 5 5 5"
-                            Text="Script runs:" TextWrapping="Wrap"/>
-                        <TextBlock Grid.Column="0" Grid.Row="1" Margin="0 5 5 5"
-                            Text="Bidi runs:" TextWrapping="Wrap"/>
-                        <TextBlock Grid.Column="0" Grid.Row="2" Margin="0 5 5 5"
-                            Text="Merged runs:" TextWrapping="Wrap"/>
-
-                        <StackPanel Orientation="Horizontal" Grid.Column="1" Grid.Row="0" Margin="0 0 0 10">
-                            <local:TextAnalysisRun ContentType="SCRIPT_RUN" Text="Hello " Length="6"/>
-                            <local:TextAnalysisRun ContentType="SCRIPT_RUN" Text="لمدة ٣ سنوات " StartPosition="6" Length="13" Script="Arab"/>
-                            <local:TextAnalysisRun ContentType="SCRIPT_RUN" Text="普洱茶" StartPosition="19" Length="3" Script="Hani"/>
+                        <!-- left column: row headings -->
+                        <StackPanel Grid.Column="0" Orientation="Vertical">
+                            <TextBlock Text="Script runs:" Margin="0 25 5 73"/>
+                            <TextBlock Text="Bidi runs:" Margin="0 5 5 75"/>
+                            <TextBlock Text="Merged runs:" Margin="0 5 5 5"/>
                         </StackPanel>
 
-                        <StackPanel Orientation="Horizontal" Grid.Column="1" Grid.Row="1" Margin="0 0 0 10">
-                            <local:TextAnalysisRun ContentType="BIDI_LEVEL_RUN" Text="Hello " StartPosition="0" Length="6"/>
-                            <local:TextAnalysisRun ContentType="BIDI_LEVEL_RUN" Text="لمدة " StartPosition="6" Length="5" BidiLevel="1"/>
-                            <local:TextAnalysisRun ContentType="BIDI_LEVEL_RUN" Text="٣" StartPosition="11" Length="1" BidiLevel="2"/>
-                            <local:TextAnalysisRun ContentType="BIDI_LEVEL_RUN" Text=" سنوات" StartPosition="12" Length="6" BidiLevel="1"/>
-                            <local:TextAnalysisRun ContentType="BIDI_LEVEL_RUN" Text=" 普洱茶" StartPosition="18" Length="4" BidiLevel="0"/>
-                        </StackPanel>
-
-                        <StackPanel Orientation="Horizontal" Grid.Column="1" Grid.Row="2" Margin="0 0 0 10">
-                            <local:TextAnalysisRun ContentType="MERGED_RUN" Text="Hello "   StartPosition="0"   Length="6" Script="Latn" BidiLevel="0"/>
-                            <local:TextAnalysisRun ContentType="MERGED_RUN" Text="لمدة "    StartPosition="6"   Length="5" Script="Arab" BidiLevel="1"/>
-                            <local:TextAnalysisRun ContentType="MERGED_RUN" Text="٣"        StartPosition="11"  Length="1" Script="Arab" BidiLevel="2"/>
-                            <local:TextAnalysisRun ContentType="MERGED_RUN" Text=" سنوات"   StartPosition="12"  Length="6" Script="Arab" BidiLevel="1"/>
-                            <local:TextAnalysisRun ContentType="MERGED_RUN" Text=" "        StartPosition="18"  Length="1" Script="Arab" BidiLevel="0"/>
-                            <local:TextAnalysisRun ContentType="MERGED_RUN" Text="普洱茶"    StartPosition="19"  Length="1" Script="Hani" BidiLevel="0"/>
-                        </StackPanel>
-
-                    </Grid>
-                    
-                    
-
-                    <ScrollViewer Grid.Row="1" Margin="15 0"
+                        <!-- right column: results -->
+                        <ScrollViewer Grid.Column="1"
                                   x:Name="ResultsScrollViewer"
                                   HorizontalScrollBarVisibility="Visible" 
                                   HorizontalScrollMode="Auto"
                                   IsTabStop="True"
                                   Padding="0 0 0 16">
-                        <StackPanel x:Name="resultsStackPanel" Orientation="Horizontal">
-                        </StackPanel>
-                    </ScrollViewer>
+                            
+                            <StackPanel Orientation="Vertical"> <!-- for three rows of results -->
+
+                                <StackPanel Orientation="Horizontal" Margin="0 0 0 10" x:Name="ScriptResultsStackPanel">
+                                    <local:TextAnalysisRun ContentType="SCRIPT_RUN" Text="Hello " Length="6"/>
+                                    <local:TextAnalysisRun ContentType="SCRIPT_RUN" Text="لمدة ٣ سنوات " StartPosition="6" Length="13" Script="Arab"/>
+                                    <local:TextAnalysisRun ContentType="SCRIPT_RUN" Text="普洱茶" StartPosition="19" Length="3" Script="Hani"/>
+                                </StackPanel>
+
+                                <StackPanel Orientation="Horizontal" Margin="0 0 0 10" x:Name="BidiResultsStackPanel">
+                                    <local:TextAnalysisRun ContentType="BIDI_LEVEL_RUN" Text="Hello " StartPosition="0" Length="6"/>
+                                    <local:TextAnalysisRun ContentType="BIDI_LEVEL_RUN" Text="لمدة " StartPosition="6" Length="5" BidiLevel="1"/>
+                                    <local:TextAnalysisRun ContentType="BIDI_LEVEL_RUN" Text="٣" StartPosition="11" Length="1" BidiLevel="2"/>
+                                    <local:TextAnalysisRun ContentType="BIDI_LEVEL_RUN" Text=" سنوات" StartPosition="12" Length="6" BidiLevel="1"/>
+                                    <local:TextAnalysisRun ContentType="BIDI_LEVEL_RUN" Text=" 普洱茶" StartPosition="18" Length="4" BidiLevel="0"/>
+                                </StackPanel>
+
+                                <StackPanel Orientation="Horizontal" Margin="0 0 0 10" x:Name="MergedResultsStackPanel">
+                                    <local:TextAnalysisRun ContentType="MERGED_RUN" Text="Hello "   StartPosition="0"   Length="6" Script="Latn" BidiLevel="0"/>
+                                    <local:TextAnalysisRun ContentType="MERGED_RUN" Text="لمدة "    StartPosition="6"   Length="5" Script="Arab" BidiLevel="1"/>
+                                    <local:TextAnalysisRun ContentType="MERGED_RUN" Text="٣"        StartPosition="11"  Length="1" Script="Arab" BidiLevel="2"/>
+                                    <local:TextAnalysisRun ContentType="MERGED_RUN" Text=" سنوات"   StartPosition="12"  Length="6" Script="Arab" BidiLevel="1"/>
+                                    <local:TextAnalysisRun ContentType="MERGED_RUN" Text=" "        StartPosition="18"  Length="1" Script="Arab" BidiLevel="0"/>
+                                    <local:TextAnalysisRun ContentType="MERGED_RUN" Text="普洱茶"    StartPosition="19"  Length="3" Script="Hani" BidiLevel="0"/>
+                                </StackPanel>
+
+                            </StackPanel>
+
+                        </ScrollViewer>
                         
+                    </Grid> <!-- end results grid -->
 
-
-                </Grid>
+                </Grid> <!-- end content grid -->
 
             </SplitView.Content>
         </SplitView>
-    </Grid>
+    </Grid> <!-- end page grid -->
 </Page>

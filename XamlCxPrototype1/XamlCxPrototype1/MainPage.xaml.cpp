@@ -47,7 +47,7 @@ void XamlCxPrototype1::MainPage::AnalyzeButton_Click(Platform::Object^ sender, W
 	TextAnalysisRun^ analysisRun = ref new TextAnalysisRun();
 	analysisRun->ContentType = CONTENT_TYPE::MERGED_RUN;
 
-	this->resultsStackPanel->Children->Append(analysisRun);
+	this->ScriptResultsStackPanel->Children->Append(analysisRun);
 
 	this->ResultsScrollViewer->Focus(Windows::UI::Xaml::FocusState::Programmatic);
 }
