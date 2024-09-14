@@ -13,8 +13,8 @@ namespace XamlCxPrototype1
 	public enum class CONTENT_TYPE : int32
 	{
 		SCRIPT_RUN,
-			BIDI_LEVEL_RUN,
-			MERGED_RUN
+		BIDI_LEVEL_RUN,
+		MERGED_RUN
 	};
 
 

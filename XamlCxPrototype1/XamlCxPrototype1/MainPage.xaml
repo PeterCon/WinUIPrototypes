@@ -86,10 +86,12 @@
                                 Orientation="Vertical" VerticalAlignment="Top" 
                                 Margin="15">
 
-                        <TextBox Header="Text to analyze:"
-                                    PlaceholderText="Enter text"
-                                    Text="Hello لمدة ٣ سنوات 普洱茶"
-                                    Margin="0 0 0 20" />
+                        <TextBox
+                            x:Name="TextToAnalyze"
+                            Header="Text to analyze:"
+                            PlaceholderText="Enter text"
+                            Text="Hello لمدة ٣ سنوات 普洱茶"
+                            Margin="0 0 0 20" />
 
                         <TextBlock Text="Base direction:" Margin="0 0 10 0"/>
                         <StackPanel Orientation="Horizontal">
@@ -102,6 +104,7 @@
                                          Checked="BaseDirection_Checked"/>
                         </StackPanel>
 
+                        <!-- TODO: REMOVE WHEN DONE WITH THIS -->
                         <TextBlock x:Name="baseDirectionChoice" Text="(not set)" Margin="0 0 0 20" Visibility="Collapsed"/>
 
                         <Button Content="Analyze text" Margin="0 0 0 20"
@@ -124,7 +127,7 @@
                         </StackPanel>
 
                         <!-- right column: results -->
-                        <ScrollViewer Grid.Column="1"
+                        <ScrollViewer Grid.Column="1" 
                                   x:Name="ResultsScrollViewer"
                                   HorizontalScrollBarVisibility="Visible" 
                                   HorizontalScrollMode="Auto"
@@ -134,9 +137,9 @@
                             <StackPanel Orientation="Vertical"> <!-- for three rows of results -->
 
                                 <StackPanel Orientation="Horizontal" Margin="0 0 0 10" x:Name="ScriptResultsStackPanel">
-                                    <local:TextAnalysisRun ContentType="SCRIPT_RUN" Text="Hello " Length="6"/>
-                                    <local:TextAnalysisRun ContentType="SCRIPT_RUN" Text="لمدة ٣ سنوات " StartPosition="6" Length="13" Script="Arab"/>
-                                    <local:TextAnalysisRun ContentType="SCRIPT_RUN" Text="普洱茶" StartPosition="19" Length="3" Script="Hani"/>
+                                    <local:TextAnalysisRun ContentType="SCRIPT_RUN" Text="Hello " Length="6" Script="ntaL"/>
+                                    <local:TextAnalysisRun ContentType="SCRIPT_RUN" Text="لمدة ٣ سنوات " StartPosition="6" Length="13" Script="barA"/>
+                                    <local:TextAnalysisRun ContentType="SCRIPT_RUN" Text="普洱茶" StartPosition="19" Length="3" Script="inaH"/>
                                 </StackPanel>
 
                                 <StackPanel Orientation="Horizontal" Margin="0 0 0 10" x:Name="BidiResultsStackPanel">

@@ -6,6 +6,8 @@
 #pragma once
 
 #include "MainPage.g.h"
+#include "TextAnalysis.h"
+#include "TextAnalysisRun.xaml.h"
 
 namespace XamlCxPrototype1
 {
@@ -23,5 +25,9 @@ namespace XamlCxPrototype1
 		void BaseDirection_Checked(Platform::Object^ sender, Windows::UI::Xaml::RoutedEventArgs^ e);
 		void AnalyzeButton_Click(Platform::Object^ sender, Windows::UI::Xaml::RoutedEventArgs^ e);
 
+		void UpdateRunResults(Platform::Object^ panel, std::vector<TextAnalysis::Run>& runs, CONTENT_TYPE type);
+
+		TextAnalysis m_textAnalysis;
 	};
+
 }
