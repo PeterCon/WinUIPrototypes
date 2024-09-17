@@ -173,18 +173,26 @@ Platform::String^ TextAnalysis::GetTextRun(UINT32 textPosition, UINT32 textLengt
 // Run methods
 
 
+Platform::String^ TextAnalysis::Run::TagToString(UINT32 tag)
+{
+	// The tag contains up to 4 ASCII characters with the first
+	// in the low-order byte. Shift and mask to get each character,
+	// cast to WCHAR, and append a null terminator.
+	WCHAR tagChars[] = {
+		static_cast<WCHAR>(tag & 0xFF),
+		static_cast<WCHAR>((tag & 0xFF00) >> 8),
+		static_cast<WCHAR>((tag & 0xFF0000) >> 16),
+		static_cast<WCHAR>((tag & 0xFF000000) >> 24),
+		L'\0'
+	};
+	return ref new Platform::String(tagChars);
+}
+
 Platform::String^ TextAnalysis::Run::ScriptTag()
 {
-	// The Run::scriptProperties field is a DWRITE_SCRIPT_PROPERTIES struct.
-	// The DWRITE_SCRIPT_PROPERTIES::isoScript field is a four-character code encoded 
-	// as a UINT32 in little-endian order.
-
-	UINT32 isoScript = this->scriptProperties.isoScriptCode;
-	std::string scriptTag(reinterpret_cast<char*>(&isoScript), 4);
-	std::wstring_convert<std::codecvt_utf8<wchar_t>> converter;
-	std::wstring wScriptTag = converter.from_bytes(scriptTag);
-	return ref new Platform::String(wScriptTag.c_str());
+	return TagToString(this->scriptProperties.isoScriptCode);
 }
+
 
 
 

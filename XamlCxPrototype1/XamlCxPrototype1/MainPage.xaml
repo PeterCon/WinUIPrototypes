@@ -134,7 +134,8 @@
                                   IsTabStop="True"
                                   Padding="0 0 0 16">
                             
-                            <StackPanel Orientation="Vertical"> <!-- for three rows of results -->
+                            <!-- results mockup: -->
+                            <!--<StackPanel Orientation="Vertical"> --><!-- for three rows of results --><!--
 
                                 <StackPanel Orientation="Horizontal" Margin="0 0 0 10" x:Name="ScriptResultsStackPanel">
                                     <local:TextAnalysisRun ContentType="SCRIPT_RUN" Text="Hello " Length="6" Script="ntaL"/>
@@ -159,12 +160,15 @@
                                     <local:TextAnalysisRun ContentType="MERGED_RUN" Text="普洱茶"    StartPosition="19"  Length="3" Script="Hani" BidiLevel="0"/>
                                 </StackPanel>
 
-                            </StackPanel>
+                            </StackPanel>-->
+
+                            <Canvas x:Name="ResultsCanvas">
+                            </Canvas>
 
                         </ScrollViewer>
                         
                     </Grid> <!-- end results grid -->
-
+                    
                 </Grid> <!-- end content grid -->
 
             </SplitView.Content>

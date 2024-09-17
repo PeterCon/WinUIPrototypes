@@ -28,6 +28,7 @@ public:
         bool isNumberSubstituted;					// true if the run is number substituted
 
         Platform::String^ ScriptTag();
+		Platform::String^ TagToString(UINT32 tag);
 
         inline bool ContainsTextPosition(UINT32 desiredTextPosition) const throw()
         {
