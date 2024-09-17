@@ -69,8 +69,8 @@ void XamlCxPrototype1::MainPage::AnalyzeButton_Click(Platform::Object^ sender, W
 
 	// Get the run tiles (these will already have been measured)
 	Platform::Collections::Vector<TextAnalysisRun^>^ scriptRunTiles = CreateTextAnalysisRunTiles(scriptRuns, CONTENT_TYPE::SCRIPT_RUN);
-	Platform::Collections::Vector<TextAnalysisRun^>^ bidiRunTiles = CreateTextAnalysisRunTiles(bidiLevelRuns, CONTENT_TYPE::SCRIPT_RUN);
-	Platform::Collections::Vector<TextAnalysisRun^>^ mergedRunTiles = CreateTextAnalysisRunTiles(mergedRuns, CONTENT_TYPE::SCRIPT_RUN);
+	Platform::Collections::Vector<TextAnalysisRun^>^ bidiRunTiles = CreateTextAnalysisRunTiles(bidiLevelRuns, CONTENT_TYPE::BIDI_LEVEL_RUN);
+	Platform::Collections::Vector<TextAnalysisRun^>^ mergedRunTiles = CreateTextAnalysisRunTiles(mergedRuns, CONTENT_TYPE::MERGED_RUN);
 
 	// Get the default run tile positions
 	std::vector<RunTileHorizontalMetrics> scriptRunTilePositions = GetRunTilePositions(scriptRunTiles, TILE_HORIZONTAL_GAP);
@@ -85,7 +85,7 @@ void XamlCxPrototype1::MainPage::AnalyzeButton_Click(Platform::Object^ sender, W
 	double scriptTileVerticalPosition = 0;
 	double bidiTileVerticalPosition = scriptRunTiles->GetAt(0)->DesiredSize.Height + TILE_VERTICAL_GAP;
 	double mergedTileVerticalPosition = bidiTileVerticalPosition + bidiRunTiles->GetAt(0)->DesiredSize.Height + TILE_VERTICAL_GAP;
-	ResultsCanvas->Height = mergedTileVerticalPosition + mergedRunTiles->GetAt(0)->DesiredSize.Height + 16;
+	ResultsCanvas->Height = mergedTileVerticalPosition + mergedRunTiles->GetAt(0)->DesiredSize.Height + 6;
 
 
 	// Place the run tiles on the canvas
