@@ -12,23 +12,23 @@ using namespace Microsoft::UI::Xaml;
 
 namespace winrt::WinUIPrototype1::implementation
 {
-	int32_t	TextAnalysisRun::ContentType()
+	CONTENT_TYPE TextAnalysisRun::ContentType()
 	{
 		return m_contentType;
 	}
-	void TextAnalysisRun::ContentType(int32_t contentType)
+	void TextAnalysisRun::ContentType(CONTENT_TYPE contentType)
 	{
 		switch (contentType)
 		{
-		case SCRIPT_RUN:
+		case CONTENT_TYPE::SCRIPT_RUN:
 			this->scriptRow().Height(GridLength{ 1.0, GridUnitType::Auto });
 			this->bidiLevelRow().Height(GridLength{ 0.0, GridUnitType::Pixel });
 			break;
-		case BIDI_LEVEL_RUN:
+		case CONTENT_TYPE::BIDI_LEVEL_RUN:
 			this->scriptRow().Height(GridLength{ 0.0, GridUnitType::Pixel });
 			this->bidiLevelRow().Height(GridLength{ 1.0, GridUnitType::Auto });
 			break;
-		case MERGED_RUN:
+		case CONTENT_TYPE::MERGED_RUN:
 			this->scriptRow().Height(GridLength{ 1.0, GridUnitType::Auto });
 			this->bidiLevelRow().Height(GridLength{ 1.0, GridUnitType::Auto });
 			break;

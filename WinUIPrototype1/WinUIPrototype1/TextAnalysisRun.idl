@@ -1,9 +1,17 @@
 namespace WinUIPrototype1
 {
+    enum CONTENT_TYPE
+        {
+            SCRIPT_RUN,
+            BIDI_LEVEL_RUN,
+            MERGED_RUN
+        };
+
     [default_interface]
     runtimeclass TextAnalysisRun : Microsoft.UI.Xaml.Controls.UserControl
     {
         TextAnalysisRun();
+	    CONTENT_TYPE ContentType;
         Int32 MyProperty;
     }
 }

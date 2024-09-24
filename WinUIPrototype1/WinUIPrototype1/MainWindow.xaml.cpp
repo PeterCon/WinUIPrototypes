@@ -32,10 +32,10 @@ namespace winrt::WinUIPrototype1::implementation
     {  
         // Try adding a TextAnalysisRun to the resultsStackPanel. Create the object, then set its ContentType property to SCRIPT_RUN.
 
-        auto analysisRun = WinUIPrototype1::TextAnalysisRun();  
+        auto analysisRun = winrt::WinUIPrototype1::TextAnalysisRun();  
 
 		// This doesn't work: the ContentType property is not found!!
-		// analysisRun.ContentType(WinUIPrototype1::implementation::TextAnalysisRun::CONTENT_TYPE::SCRIPT_RUN);
+		analysisRun.ContentType(CONTENT_TYPE::SCRIPT_RUN);
 
         // making sure I can add a stock control first; replace with the custom control 
         auto textBlock = Microsoft::UI::Xaml::Controls::TextBlock();  
